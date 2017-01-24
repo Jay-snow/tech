@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta content="IE=edge" http-equiv="X-UA-Compatible">
+	<meta content="width=device-width, initial-scale=1" name="viewport"><!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+
+	<title>Yosh Movie</title><!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<!-- Bootstrap Javascript -->
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+	</script><!-- Bootstrap CSS -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"><!-- JQuery -->
+
+	
+	</script>
+	<style>
+		body {
+		background-color:black;
+		color:white;
+		}
+	
+	
+	   #output {
+	   border: 1px solid;
+	   width: 900px;
+	   height: 900px;
+
+	   }
+
+	   #Title {
+	   font-size:1.5em;
+	   }
+
+	   .container-fluid {
+	   border-style: double;
+	   }
+	   
+		img {
+		width:70%;
+		height:70%;
+		text-align:center;
+		}
+		
+		p {
+		margin:0;
+		}
+	   
+	</style>
+</head>
+
+<body>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12 ">
+		
+			<div class="col-md-3">
+			<span id="Poster_OUTPUT" > </span>
+			
+			</div>
+			
+			<div class="col-md-9">
+			
+			<span id="Title_OUTPUT">Title </span> 
+			<span id="Year_OUTPUT">Year </span>
+			<span id="Director_OUTPUT">Director</span>
+			<span id="Plot_OUTPUT">Plot</span>
+			<span id="Actors_OUTPUT">Actors</span>
+
+			<p>
+			<span id="Metascore_OUTPUT">Metascore</span>
+			<span id="imdbRating_OUTPUT">imdbRating</span>
+			
+			</p>
+			</div>
+
+		 
+		
+		</div>
+		
+		
+		
+		
+	</div>
+</div>
+<img style="width:25%;height:25%;" onclick="chooseMovie();" src="button.jpg" class="img-responsive img-thumbnail">
+		
+
+
+	<div id="Poster_OutPut">
+		<script>
+		
+var collection = "12+Angry+Men,12+Monkeys,28+Days+Later+/+28+Weeks+Later,3+Women,The+36th+Chamber+of+Shaolin,The+39+Steps,The+400+Blows,8½,Ace+in+the+Hole,Adaptation.,The+Adventures+of+Baron+Munchausen,Akira,Aladdin,Alfred+Hitchcock:+The+Classic+Collection,Alfred+Hitchcock:+The+Masterpiece+Collection,Alien+Anthology,All+That+Jazz,Amarcord,Amélie,America+Lost+and+Found:+The+BBS+Story,American+History+X+/+A+History+of+Violence,American+Psycho,An+American+Werewolf+in+London,Apocalypse+Now,The+Apu+Trilogy,Atonement,Au+Revoir+Les+Enfants,The+Babadook,Bad+Lieutenant:+Port+of+Call+New+Orleans,Badlands,Band+of+Outsiders,Barton+Fink,The+Battle+of+Algiers,Beauty+and+the+Beast,Before+Midnight,Being+John+Malkovich,Being+There,Belle+de+jour,The+Big+City,The+Big+Lebowski,Big+Trouble+in+Little+China,Birdman,Black+Narcissus,Black+Swan,Blade+Runner,Blow+Out,Blue+Velvet,The+Blues+Brothers+-+Limited+Edition,Body+Heat+/+L.A.+Confidential+/+The+Player,Bonnie+and+Clyde,Boogie+Nights,Bottle+Rocket,Brazil,A+Brief+History+of+Time,The+Brood,Burn+After+Reading,By+Brakhage:+An+Anthology,+Volumes+One+and+Two,The+Cabin+in+the+Woods,Carlos,Casino+Royale,Certified+Copy,Che,Children+of+Men,Chungking+Express,A+Clockwork+Orange,Close+Encounters+of+the+Third+Kind,Close-Up,Collateral,The+Complete+Jacques+Tati,The+Complete+Monterey+Pop+Festival,Confessions+of+a+Dangerous+Mind,The+Conversation,Coraline,Cowboy+Bebop:+The+Complete+Series,Cowboy+Bebop:+The+Movie,Cronos,Crouching+Tiger,+Hidden+Dragon,The+Curious+Case+of+Benjamin+Button,The+Darjeeling+Limited,Dark+City,The+Dark+Knight+Trilogy,Dawn+of+the+Dead,Dawn+of+the+Planet+of+the+Apes,Dazed+and+Confused,Delicatessen";
+
+var collection_ARRAY = collection.split(',');
+    
+var movie = '';
+//This is the function that does it all.
+// 1. Randomizes the collection_ARRAY choice. Picks a random string.
+// 2. Request info from omdbapi. Insert collection_ARRAY string into URL to request random movie.
+// 3. Through magic pull the movie info and put it into a paragraph tag above.
+
+	function chooseMovie() {
+	var movie_PICK = collection_ARRAY[Math.floor(Math.random()*collection_ARRAY.length)];
+		      // Ajax call to open IMDB.
+		      console.log('chooseMovie() has run successfully.');
+		      $.ajax({ 
+		        type: 'GET', 
+		        url: 'http://www.omdbapi.com/?t=' + movie_PICK + '&y=&plot=short&r=json', 
+		        dataType: 'json',
+				//error: console.log(movie_PICK + " was not found!"),
+		        success: function (data) { 
+		            $.each(data, function(index, element)  {
+		                //console.log(data);
+		                switch(index) {
+							case "Title":
+							$('#' + index + "_OUTPUT").empty();
+								$('#' + index + "_OUTPUT").append('<p id=' + index + '>' + element + '<\/p>');
+								break;
+							case "Year":
+							$('#' + index + "_OUTPUT").empty();
+								$('#' + index + "_OUTPUT").append('<p id=' + index + '>' + element + '<\/p>');
+								break;
+							case "Director":
+							$('#' + index + "_OUTPUT").empty();
+								$('#' + index + "_OUTPUT").append('<p id=' + index + '>' + 'Directed By: ' + element + '<\/p>');
+								break;
+							case "Plot":
+							$('#' + index + "_OUTPUT").empty();
+								$('#' + index + "_OUTPUT").append('<p id=' + index + '>' + 'Plot: ' + element + '<\/p>');
+								break;	
+							case "Actors":
+							$('#' + index + "_OUTPUT").empty();
+								$('#' + index + "_OUTPUT").append('<p id=' + index + '>' + 'Actors: ' + element + '<\/p>');
+								break;
+							case "Metascore":
+							$('#' + index + "_OUTPUT").empty();
+								$('#' + index + "_OUTPUT").append('<p id=' + index + '>' + 'Metascore: ' + element + '<\/p>');
+								break;
+							case "imdbRating":
+							$('#' + index + "_OUTPUT").empty();
+								$('#' + index + "_OUTPUT").append('<p id=' + index + '>' + 'IMDB Rating: ' + element + '<\/p>');
+								break;
+
+		                    case "Poster":
+							$('#' + index + "_OUTPUT").empty();
+		                        $('#' + index + "_OUTPUT").append('<img class="img-responsive img-rounded" src=' + element + '>');
+		                        break;
+							case "Error":
+							console.log(movie_PICK + " was not found!");
+		                        break;
+		                    
+		                
+		                }
+		                console.log('Index: ' + index + ' | Element: ' + element);
+		                $('#output').append('<p id=' + index + '>' + element + '<\/p>');
+		                
+		                //$('#output').append('<img src=' + element + '>');
+		                
+		                
+		                
+		            });
+		        }
+				
+		      });
+
+
+		 }      
+		</script>
+
+		<p>
+		</p>
+	</div>
+</body>
+</html>
