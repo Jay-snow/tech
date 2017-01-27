@@ -1,5 +1,33 @@
 <!DOCTYPE html>
 
+<!--
+
+OMDB Index & Element Map
+
+Index: Title | Element: The 39 Steps
+ Index: Year | Element: 1935
+ Index: Rated | Element: UNRATED
+ Index: Released | Element: 01 Aug 1935
+ Index: Runtime | Element: 86 min
+ Index: Genre | Element: Mystery, Thriller
+ Index: Director | Element: Alfred Hitchcock
+ Index: Writer | Element: John Buchan (adapted from the novel by), Charles Bennett (adaptation), Ian Hay (dialogue)
+ Index: Actors | Element: Robert Donat, Madeleine Carroll, Lucie Mannheim, Godfrey Tearle
+ Index: Plot | Element: A man in London tries to help a counterespionage agent. But when the agent is killed and the man stands accused, he must go on the run to both save himself and also stop a spy ring which is trying to steal top secret information.
+ Index: Language | Element: English
+ Index: Country | Element: UK
+ Index: Awards | Element: 1 win & 1 nomination.
+ Index: Poster | Element: https://images-na.ssl-images-amazon.com/images/M/MV5BYzlhMDA4NDctNTI3Mi00MmVlLTg2NDctM2Q0YWY3ZjE0ZjEyXkEyXkFqcGdeQXVyNjc0MzMzNjA@._V1_SX300.jpg
+ Index: Metascore | Element: N/A
+ Index: imdbRating | Element: 7.8
+ Index: imdbVotes | Element: 41,023
+ Index: imdbID | Element: tt0026029
+ Index: Type | Element: movie
+
+
+Use for CSS, Index = ID.
+
+-->
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -23,8 +51,8 @@
 	</script>
 	<style>
 		body {
-		background-color:black;
-		color:white;
+		background-color:#191919;
+		color:#CCCCCC;
 		}
 	
 	
@@ -36,11 +64,11 @@
 	   }
 
 	   #Title {
-	   font-size:1.5em;
+	   font-size:2.0em;
 	   }
 
-	   .container-fluid {
-	   border-style: double;
+	   #Year {
+	   font-size:1.3em;
 	   }
 	   
 		img {
@@ -53,6 +81,9 @@
 		margin:0;
 		}
 	   
+	   span {
+	   font-size:1.1em;
+	   }
 	</style>
 </head>
 
@@ -63,20 +94,23 @@
 		
 			<div class="col-md-3">
 			<span id="Poster_OUTPUT" > </span>
-			
+			<audio class="play" >
+			<!-- <source src="showMe.wav" type="audio/wav"> -->
+			</audio>
 			</div>
 			
 			<div class="col-md-9">
 			
-			<span id="Title_OUTPUT">Title </span> 
-			<span id="Year_OUTPUT">Year </span>
-			<span id="Director_OUTPUT">Director</span>
-			<span id="Plot_OUTPUT">Plot</span>
-			<span id="Actors_OUTPUT">Actors</span>
+			<span id="Title_OUTPUT"> </span> 
+			<span id="Year_OUTPUT"> </span>
+			<span id="Awards_OUTPUT"></span>
+			<span id="Director_OUTPUT"></span>
+			<span id="Plot_OUTPUT"></span>
+			<span id="Actors_OUTPUT"></span>
 
 			<p>
-			<span id="Metascore_OUTPUT">Metascore</span>
-			<span id="imdbRating_OUTPUT">imdbRating</span>
+			<span id="Metascore_OUTPUT"></span>
+			<span id="imdbRating_OUTPUT"></span>
 			
 			</p>
 			</div>
@@ -90,18 +124,40 @@
 		
 	</div>
 </div>
-<img style="width:25%;height:25%;" onclick="chooseMovie();" src="button.jpg" class="img-responsive img-thumbnail">
+
+<img  style="width:25%;height:25%;" onclick="chooseMovie();" src="button.jpg" class="img-responsive img-thumbnail">
+
+<img  style="width:25%;height:25%;border-color:red;" onclick="removeMovie();" src="button.jpg" class="img-responsive">
 		
 
 
-	<div id="Poster_OutPut">
+	<div >
 		<script>
 		
 var collection = "12+Angry+Men,12+Monkeys,28+Days+Later+/+28+Weeks+Later,3+Women,The+36th+Chamber+of+Shaolin,The+39+Steps,The+400+Blows,8½,Ace+in+the+Hole,Adaptation.,The+Adventures+of+Baron+Munchausen,Akira,Aladdin,Alfred+Hitchcock:+The+Classic+Collection,Alfred+Hitchcock:+The+Masterpiece+Collection,Alien+Anthology,All+That+Jazz,Amarcord,Amélie,America+Lost+and+Found:+The+BBS+Story,American+History+X+/+A+History+of+Violence,American+Psycho,An+American+Werewolf+in+London,Apocalypse+Now,The+Apu+Trilogy,Atonement,Au+Revoir+Les+Enfants,The+Babadook,Bad+Lieutenant:+Port+of+Call+New+Orleans,Badlands,Band+of+Outsiders,Barton+Fink,The+Battle+of+Algiers,Beauty+and+the+Beast,Before+Midnight,Being+John+Malkovich,Being+There,Belle+de+jour,The+Big+City,The+Big+Lebowski,Big+Trouble+in+Little+China,Birdman,Black+Narcissus,Black+Swan,Blade+Runner,Blow+Out,Blue+Velvet,The+Blues+Brothers+-+Limited+Edition,Body+Heat+/+L.A.+Confidential+/+The+Player,Bonnie+and+Clyde,Boogie+Nights,Bottle+Rocket,Brazil,A+Brief+History+of+Time,The+Brood,Burn+After+Reading,By+Brakhage:+An+Anthology,+Volumes+One+and+Two,The+Cabin+in+the+Woods,Carlos,Casino+Royale,Certified+Copy,Che,Children+of+Men,Chungking+Express,A+Clockwork+Orange,Close+Encounters+of+the+Third+Kind,Close-Up,Collateral,The+Complete+Jacques+Tati,The+Complete+Monterey+Pop+Festival,Confessions+of+a+Dangerous+Mind,The+Conversation,Coraline,Cowboy+Bebop:+The+Complete+Series,Cowboy+Bebop:+The+Movie,Cronos,Crouching+Tiger,+Hidden+Dragon,The+Curious+Case+of+Benjamin+Button,The+Darjeeling+Limited,Dark+City,The+Dark+Knight+Trilogy,Dawn+of+the+Dead,Dawn+of+the+Planet+of+the+Apes,Dazed+and+Confused,Delicatessen";
 
-var collection_ARRAY = collection.split(',');
-    
+var collection_ARRAY = collection.split(',');   
 var movie = '';
+
+
+//Plays sound effect on image click
+$( document ).ready(function() {
+ 
+    $( "img" ).click(function( event ) {
+ 
+      
+		
+		$('.play').trigger("play");
+    });
+ 
+});
+var practice = [0,1,2,3,4,5];
+var rand = practice[Math.floor(Math.random() * practice.length)];
+function removeMovie() {
+alert(Math.random());
+
+}
+
 //This is the function that does it all.
 // 1. Randomizes the collection_ARRAY choice. Picks a random string.
 // 2. Request info from omdbapi. Insert collection_ARRAY string into URL to request random movie.
@@ -128,33 +184,37 @@ var movie = '';
 							$('#' + index + "_OUTPUT").empty();
 								$('#' + index + "_OUTPUT").append('<p id=' + index + '>' + element + '<\/p>');
 								break;
+							case "Awards":
+							$('#' + index + "_OUTPUT").empty();
+								$('#' + index + "_OUTPUT").append('<p id=' + index + '>' + '<strong>Awards:</strong> ' + element + '<\/p>');
+								break;
 							case "Director":
 							$('#' + index + "_OUTPUT").empty();
-								$('#' + index + "_OUTPUT").append('<p id=' + index + '>' + 'Directed By: ' + element + '<\/p>');
+								$('#' + index + "_OUTPUT").append('<p id=' + index + '>' + '<strong>Directed By:</strong> ' + element + '<\/p>');
 								break;
 							case "Plot":
 							$('#' + index + "_OUTPUT").empty();
-								$('#' + index + "_OUTPUT").append('<p id=' + index + '>' + 'Plot: ' + element + '<\/p>');
+								$('#' + index + "_OUTPUT").append('<p id=' + index + '>' + '<strong>Plot: </strong>' + element + '<\/p>');
 								break;	
 							case "Actors":
 							$('#' + index + "_OUTPUT").empty();
-								$('#' + index + "_OUTPUT").append('<p id=' + index + '>' + 'Actors: ' + element + '<\/p>');
+								$('#' + index + "_OUTPUT").append('<p id=' + index + '>' + '<strong>Actors: </strong>' + element + '<\/p>');
 								break;
 							case "Metascore":
 							$('#' + index + "_OUTPUT").empty();
-								$('#' + index + "_OUTPUT").append('<p id=' + index + '>' + 'Metascore: ' + element + '<\/p>');
+								$('#' + index + "_OUTPUT").append('<p id=' + index + '>' + '<strong>Metascore: </strong>' + element + '<\/p>');
 								break;
 							case "imdbRating":
 							$('#' + index + "_OUTPUT").empty();
-								$('#' + index + "_OUTPUT").append('<p id=' + index + '>' + 'IMDB Rating: ' + element + '<\/p>');
+								$('#' + index + "_OUTPUT").append('<p id=' + index + '>' + '<strong>IMDB Rating: </strong>' + element + '<\/p>');
 								break;
 
 		                    case "Poster":
 							$('#' + index + "_OUTPUT").empty();
-		                        $('#' + index + "_OUTPUT").append('<img class="img-responsive img-rounded" src=' + element + '>');
+		                        $('#' + index + "_OUTPUT").append('<img alt="Image not found" class="img-responsive img-rounded" src=' + element + '>');
 		                        break;
 							case "Error":
-							console.log(movie_PICK + " was not found!");
+							alert(movie_PICK + " was not found!");
 		                        break;
 		                    
 		                
@@ -169,10 +229,10 @@ var movie = '';
 		            });
 		        }
 				
-		      });
+		      }); //end of ajax
 
-
-		 }      
+			$("audio").play();
+		 }     //end of chooseMovie(); 
 		</script>
 
 		<p>
