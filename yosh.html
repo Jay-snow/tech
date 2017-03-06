@@ -35,6 +35,15 @@
 
 	   }
 
+	   #randomButton {
+	   	width:100%;
+	   	height:60px;
+	   	background-color:lightblue;
+	   	text-align:center;
+	   	font-size:2em;
+	   	color:black;
+	   }
+
 	   #Title {
 	   font-size:1.5em;
 	   }
@@ -57,6 +66,12 @@
 </head>
 
 <body>
+
+<!-- Static navbar -->
+<div id="randomButton" onclick="chooseMovie();">
+SHOW ME WHAT YOU GOT
+</div>
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12 ">
@@ -155,6 +170,7 @@ var movie = '';
 		                        break;
 							case "Error":
 							console.log(movie_PICK + " was not found!");
+							alert(movie_PICK + " was not found!");
 		                        break;
 		                    
 		                
